@@ -7,7 +7,7 @@
   "private": false,
   "scripts": {
     "build": "tsc",
-    "dev": "tsc-watch --onSuccess \"yarn start\"",
+    "dev": "tsc-watch --onSuccess \"npm start\"",
     "start": "node ./dist/index.js"
   },
   "dependencies": {
