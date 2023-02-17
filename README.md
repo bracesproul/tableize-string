@@ -1,6 +1,6 @@
 # Tableize string
 
-This is a tiny (5.65 KiB) package that takes in an input and returns a simple string table.
+This is a tiny package that takes in an input and returns a simple string table.
 
 Example:
 ```ts
