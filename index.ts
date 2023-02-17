@@ -1,10 +1,11 @@
+let HORIZONTAL = '════════════════════';
+const SINGLE_HORIZONTAL = '═';
 const LEFT_CORNER = '╔';
 const RIGHT_CORNER = '╗';
 const LEFT_VERTICAL = '╠';
 const RIGHT_VERTICAL = '╣';
 const LEFT_BOTTOM_CORNER = '╚';
 const RIGHT_BOTTOM_CORNER = '╝';
-const HORIZONTAL = '════════════════════';
 const VERTICAL = '║';
 const CROSS = '╬';
 const TOP_HORIZONTAL = '╦';
@@ -50,24 +51,27 @@ export default function tableize(input: TabelizeInput) {
         }
       });
     })
+
+    if (columnWidth > BASE_COLUMN_PADDING) {
+      HORIZONTAL = HORIZONTAL.padEnd(columnWidth + 2, SINGLE_HORIZONTAL);
+    }
   };
   getMaxColumnWidth();
-
 
   const createMiddleRowBorder = () => {
     for (let i = 0; i < numberOfColumns; i++) {
       if (numberOfColumns === 1) {
         // is only one column
-        tableString = `${tableString}${LEFT_VERTICAL}${HORIZONTAL.padEnd(columnWidth + 2)}${RIGHT_VERTICAL}\n`;
+        tableString = `${tableString}${LEFT_VERTICAL}${HORIZONTAL}${RIGHT_VERTICAL}\n`;
       } else if (i === 0) {
         // is first header
-        tableString = `${tableString}${LEFT_VERTICAL}${HORIZONTAL.padEnd(columnWidth + 2)}`;
+        tableString = `${tableString}${LEFT_VERTICAL}${HORIZONTAL}`;
       } else if ((i + 1) === numberOfColumns) {
         // is last header
-        tableString = `${tableString}${CROSS}${HORIZONTAL.padEnd(columnWidth + 2)}${RIGHT_VERTICAL}\n`;
+        tableString = `${tableString}${CROSS}${HORIZONTAL}${RIGHT_VERTICAL}\n`;
       } else {
         // is middle header
-        tableString = `${tableString}${CROSS}${HORIZONTAL.padEnd(columnWidth + 2)}`;
+        tableString = `${tableString}${CROSS}${HORIZONTAL}`;
       }
     };
   };
@@ -76,16 +80,16 @@ export default function tableize(input: TabelizeInput) {
     for (let i = 0; i < numberOfColumns; i++) {
       if (numberOfColumns === 1) {
         // is only one column
-        tableString = `${tableString}${LEFT_BOTTOM_CORNER}${HORIZONTAL.padEnd(columnWidth + 2)}${RIGHT_BOTTOM_CORNER}\n`;
+        tableString = `${tableString}${LEFT_BOTTOM_CORNER}${HORIZONTAL}${RIGHT_BOTTOM_CORNER}\n`;
       } else if (i === 0) {
         // is first header
-        tableString = `${tableString}${LEFT_BOTTOM_CORNER}${HORIZONTAL.padEnd(columnWidth + 2)}`;
+        tableString = `${tableString}${LEFT_BOTTOM_CORNER}${HORIZONTAL}`;
       } else if ((i + 1) === numberOfColumns) {
         // is last header
-        tableString = `${tableString}${BOTTOM_HORIZONTAL}${HORIZONTAL.padEnd(columnWidth + 2)}${RIGHT_BOTTOM_CORNER}\n`;
+        tableString = `${tableString}${BOTTOM_HORIZONTAL}${HORIZONTAL}${RIGHT_BOTTOM_CORNER}\n`;
       } else {
         // is middle header
-        tableString = `${tableString}${BOTTOM_HORIZONTAL}${HORIZONTAL.padEnd(columnWidth + 2)}`;
+        tableString = `${tableString}${BOTTOM_HORIZONTAL}${HORIZONTAL}`;
       }
     };
   };
