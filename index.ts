@@ -12,19 +12,16 @@ const TOP_HORIZONTAL = '╦';
 const BOTTOM_HORIZONTAL = '╩';
 
 type TabelizeInput = {
-  headers: (string | number)[];
-  rows: (string | number)[][];
+  headers: string[];
+  rows: string[][];
 }
 
 const BASE_COLUMN_PADDING = 18;
 
 export default function tableize(input: TabelizeInput) {
   const { headers, rows } = input;
-  const headerAsStrings = headers.map(header => header.toString());
-  const rowsAsStrings = rows.map(row => row.map(cell => cell.toString()));
-
   let tableString = LEFT_CORNER;
-  const numberOfColumns = headerAsStrings.length;
+  const numberOfColumns = headers.length;
   const numberOfRows = Math.max(...rows.map(row => row.length));
   let columnWidth = BASE_COLUMN_PADDING;
 
@@ -38,12 +35,12 @@ export default function tableize(input: TabelizeInput) {
   }
 
   // Gets the longest string length in the headers and rows
-  headerAsStrings.forEach((header) => {
+  headers.forEach((header) => {
     if (header.length > columnWidth) {
       columnWidth = header.length;
     }
   });
-  rowsAsStrings.forEach((row) => {
+  rows.forEach((row) => {
     row.forEach((cell) => {
       if (cell.length > columnWidth) {
         columnWidth = cell.length;
@@ -93,13 +90,13 @@ export default function tableize(input: TabelizeInput) {
   for (let i = 0; i < numberOfColumns; i++) {
     if (numberOfColumns === 1) {
       // is only one column
-      tableString = `${tableString}${VERTICAL} ${headerAsStrings[i]?.padEnd(columnWidth)} ${VERTICAL}\n`;
+      tableString = `${tableString}${VERTICAL} ${headers[i]?.padEnd(columnWidth)} ${VERTICAL}\n`;
     } else if ((i + 1) === numberOfColumns) {
       // is last header
-      tableString = `${tableString}${VERTICAL} ${headerAsStrings[i]?.padEnd(columnWidth)} ${VERTICAL}\n`;
+      tableString = `${tableString}${VERTICAL} ${headers[i]?.padEnd(columnWidth)} ${VERTICAL}\n`;
     } else {
       // is middle header
-      tableString = `${tableString}${VERTICAL} ${headerAsStrings[i]?.padEnd(columnWidth)} `;
+      tableString = `${tableString}${VERTICAL} ${headers[i]?.padEnd(columnWidth)} `;
     }
   };
 
@@ -109,7 +106,7 @@ export default function tableize(input: TabelizeInput) {
   // 4. Creates the rows and applies a border beneath each row
   for (let i = 0; i < numberOfColumns; i++) {
     for (let j = 0; j < numberOfRows; j++) {
-      const row = rowsAsStrings[i]?.[j]?.padEnd(columnWidth) ?? ''.padEnd(columnWidth);
+      const row = rows[i]?.[j]?.padEnd(columnWidth) ?? ''.padEnd(columnWidth);
 
       if (numberOfRows === 1) {
         // is only one column
