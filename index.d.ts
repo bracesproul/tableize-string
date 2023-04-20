@@ -1,6 +1,6 @@
 type TabelizeInput = {
-    headers: (string | number)[];
-    rows: (string | number)[][];
+    headers: string[];
+    rows: string[][];
 };
 export default function tableize(input: TabelizeInput): string;
 export {};
