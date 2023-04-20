@@ -2,7 +2,7 @@
   "name": "tableize-string",
   "author": "Brace Sproul",
   "version": "1.0.1",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "license": "MIT",
   "private": false,
   "scripts": {

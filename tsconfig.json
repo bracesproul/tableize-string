@@ -4,7 +4,7 @@
     "lib": ["ES2020"],
     "module": "CommonJS",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./",
     "declaration": true,
     "strict": true,
     "moduleResolution": "node",
